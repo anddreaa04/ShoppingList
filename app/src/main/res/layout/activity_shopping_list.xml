@@ -39,7 +39,9 @@
             android:layout_toLeftOf="@+id/btn_add"
             android:layout_toStartOf="@+id/btn_add"
             android:ems="10"
-            android:inputType="textPersonName" />
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            />
 
         <Button
             android:id="@+id/btn_add"
