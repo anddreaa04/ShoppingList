@@ -51,7 +51,10 @@ public class ShoppingListActivity extends AppCompatActivity {
 
     private void addItem() {
         String item_text= edit_item.getText().toString();
-        itemList.add(item_text);
-        adapter.notifyDataSetChanged();
+        if(!item_text.isEmpty()){
+            itemList.add(item_text);
+            adapter.notifyDataSetChanged();
+        }
+
     }
 }
