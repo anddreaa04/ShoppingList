@@ -41,6 +41,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         itemList.add(new Shoppingitem("Papel WC"));
 
         adapter= new ShoppingListAdapter(this, android.R.layout.simple_list_item_1, itemList);
+
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,6 +59,15 @@ public class ShoppingListActivity extends AppCompatActivity {
         });
 
         list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+                itemList.get(pos).toogleChecked();
+                adapter.notifyDataSetChanged();
+            }
+        });
+
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> list, View item, int pos, long id) {

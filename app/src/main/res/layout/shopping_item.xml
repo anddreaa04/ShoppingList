@@ -10,5 +10,7 @@
         android:layout_height="?attr/listPreferredItemHeight"
         android:text="CheckBox"
         android:paddingLeft="10dp"
-        android:textSize="16dp"/>
+        android:textSize="16dp"
+        android:focusable="false"
+        android:clickable="false"/>
 </LinearLayout>
