@@ -10,6 +10,10 @@ public class Shoppingitem {
         this.checked = checked;
     }
 
+    public Shoppingitem(String text) {
+        this.text = text;
+    }
+
     public String getText() {
         return text;
     }

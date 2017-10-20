@@ -12,7 +12,7 @@ import android.widget.CheckBox;
 
 import java.util.List;
 
-public class ShoppingListAdapter extends ArrayAdapter<String> {
+public class ShoppingListAdapter extends ArrayAdapter<Shoppingitem> {
 
     public ShoppingListAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull List objects) {
         super(context, resource, objects);
@@ -27,8 +27,8 @@ public class ShoppingListAdapter extends ArrayAdapter<String> {
             result= inflater.inflate(R.layout.shopping_item,null);
         }
         CheckBox checkbox =(CheckBox)result.findViewById(R.id.shopping_item);
-        String item_text= getItem(position);
-        checkbox.setText(item_text);
+        Shoppingitem item= getItem(position);
+        checkbox.setText(item.getText());
         return result;
     }
 }
