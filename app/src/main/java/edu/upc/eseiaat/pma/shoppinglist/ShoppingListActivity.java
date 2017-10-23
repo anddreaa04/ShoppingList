@@ -69,13 +69,16 @@ public class ShoppingListActivity extends AppCompatActivity {
             FileInputStream fis= openFileInput((FILENAME));
            byte[] buffer= new byte[MAX_BYTES];
            int nread = fis.read(buffer);
-            String content = new String(buffer, 0,nread);
-            String[] lines = content.split("\n");
-            //es reemplaça un for per un foreach, llegeix cada linia.
-            for (String line : lines) {
-                String[] parts = line.split(";");
-                itemList.add(new Shoppingitem(parts[0], parts[1].equals("true")));
-            }
+           if(nread>0){
+               String content = new String(buffer, 0,nread);
+               String[] lines = content.split("\n");
+               //es reemplaça un for per un foreach, llegeix cada linia.
+               for (String line : lines) {
+                   String[] parts = line.split(";");
+                   itemList.add(new Shoppingitem(parts[0], parts[1].equals("true")));
+               }
+           }
+
             fis.close();
 
         } catch (FileNotFoundException e) {
@@ -179,10 +182,28 @@ public class ShoppingListActivity extends AppCompatActivity {
             case R.id.clear_checked:
                 clearChecked();
                 return true;
+            case R.id.clear_all:
+                clearAll();
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void clearAll() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle(R.string.confirm);
+        builder.setMessage(R.string.confirm_clear_all);
+        builder.setPositiveButton(R.string.clear_all, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                itemList.clear();
+                adapter.notifyDataSetChanged();
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, null);
+        builder.create().show();
     }
 
     private void clearChecked() {
