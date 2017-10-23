@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -170,4 +171,32 @@ public class ShoppingListActivity extends AppCompatActivity {
         inflater.inflate(R.menu.options,menu);
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.clear_checked:
+                clearChecked();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void clearChecked() {
+        int i =0;
+        //Cal fer un while i no un for degut a que si no, al borrar un item el n+1 passa a ser n
+        // i el programa no acaba d funcionar.
+        while ( i<itemList.size()){
+            if(itemList.get(i).isChecked()){
+                itemList.remove(i);
+            }else{
+                i++;
+            }
+        }
+    adapter.notifyDataSetChanged();
+    }
+
 }
